@@ -9,8 +9,10 @@ import (
 func main() {
 	app := newSolution()
 	err := checkErrors(
+		app.parseConfig,
 		app.connectExchange,
-		app.setupRouter,
+		app.setupRoutes,
+		app.runGin,
 	)
 	if err != nil {
 		log.Fatalln(err)
@@ -21,15 +23,13 @@ func newSolution() *solution {
 	return &solution{}
 }
 
-func (sol *solution) setupRouter() error {
-	router := router{
-		Gin: gin.Default(),
-	}
-	err := router.setupRoutes()
-	if err != nil {
-		return err
-	}
-	return router.Gin.Run()
+func (sol *solution) initGin() error {
+	sol.Gin = gin.Default()
+	return nil
+}
+
+func (sol *solution) runGin() error {
+	return sol.Gin.Run()
 }
 
 func (sol *solution) connectExchange() error {

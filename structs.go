@@ -1,10 +1,13 @@
 package main
 
-import "github.com/Sagleft/uexchange-go"
+import (
+	"github.com/Sagleft/uexchange-go"
+	"github.com/gin-gonic/gin"
+)
 
 type solution struct {
-	Config appConfig
-
+	Config         appConfig
+	Gin            *gin.Engine
 	ExchangeClient *uexchange.Client
 }
 

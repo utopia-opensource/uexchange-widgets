@@ -6,32 +6,28 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type router struct {
-	Gin *gin.Engine
-}
+func (sol *solution) setupRoutes() error {
+	sol.loadTemplates("./templates/*")
+	sol.Gin.Static("/assets", "./assets")
 
-func (r *router) setupRoutes() error {
-	r.loadTemplates("./templates/*")
-	r.Gin.Static("/assets", "./assets")
-
-	r.Gin.GET("/", func(c *gin.Context) {
-		r.renderTemplate(
+	sol.Gin.GET("/", func(c *gin.Context) {
+		sol.renderTemplate(
 			c,
 			http.StatusOK,
 			"home.html",
 			gin.H{},
 		)
 	})
-	r.Gin.NoRoute(func(c *gin.Context) {
-		r.renderTemplate(
+	sol.Gin.NoRoute(func(c *gin.Context) {
+		sol.renderTemplate(
 			c,
 			http.StatusNotFound,
 			"404.html",
 			gin.H{},
 		)
 	})
-	r.Gin.GET("/pairs", func(c *gin.Context) {
-		r.renderTemplate(
+	sol.Gin.GET("/pairs", func(c *gin.Context) {
+		sol.renderTemplate(
 			c,
 			http.StatusOK,
 			"pairs.html",
@@ -42,10 +38,10 @@ func (r *router) setupRoutes() error {
 	return nil
 }
 
-func (r *router) loadTemplates(pattern string) {
-	r.Gin.LoadHTMLGlob(pattern)
+func (sol *solution) loadTemplates(pattern string) {
+	sol.Gin.LoadHTMLGlob(pattern)
 }
 
-func (r *router) renderTemplate(c *gin.Context, code int, name string, obj interface{}) {
+func (sol *solution) renderTemplate(c *gin.Context, code int, name string, obj interface{}) {
 	c.HTML(code, name, obj)
 }
