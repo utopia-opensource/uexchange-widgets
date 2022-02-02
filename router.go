@@ -22,14 +22,6 @@ func (r *router) setupRoutes() error {
 			gin.H{},
 		)
 	})
-	r.Gin.GET("/showcase", func(c *gin.Context) {
-		r.renderTemplate(
-			c,
-			http.StatusOK,
-			"showcase.html",
-			gin.H{},
-		)
-	})
 	r.Gin.NoRoute(func(c *gin.Context) {
 		r.renderTemplate(
 			c,
