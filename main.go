@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"log"
 
 	"github.com/Sagleft/uexchange-go"
@@ -11,6 +12,7 @@ func main() {
 	app := newSolution()
 	err := checkErrors(
 		app.parseConfig,
+		app.initGin,
 		app.connectExchange,
 		app.setupRoutes,
 		app.runGin,
@@ -40,5 +42,8 @@ func (sol *solution) connectExchange() error {
 }
 
 func (sol *solution) getExchangePairs() ([]uexchange.PairsDataContainer, error) {
+	if sol.ExchangeClient == nil {
+		return nil, errors.New("exchange client is not set")
+	}
 	return sol.ExchangeClient.GetPairs()
 }
