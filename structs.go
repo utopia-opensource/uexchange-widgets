@@ -1,7 +1,11 @@
 package main
 
+import "github.com/Sagleft/uexchange-go"
+
 type solution struct {
 	Config appConfig
+
+	ExchangeClient *uexchange.Client
 }
 
 type appConfig struct {

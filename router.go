@@ -30,6 +30,14 @@ func (r *router) setupRoutes() error {
 			gin.H{},
 		)
 	})
+	r.Gin.GET("/pairs", func(c *gin.Context) {
+		r.renderTemplate(
+			c,
+			http.StatusOK,
+			"pairs.html",
+			gin.H{},
+		)
+	})
 
 	return nil
 }
