@@ -1,1 +1,6 @@
-{}
+{
+    "exchange": {
+        "pubkey": "",
+        "password": ""
+    }
+}
