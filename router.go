@@ -27,11 +27,19 @@ func (sol *solution) setupRoutes() error {
 		)
 	})
 	sol.Gin.GET("/pairs", func(c *gin.Context) {
+		pairs, err := sol.getExchangePairs()
+		if err != nil {
+			c.String(http.StatusInternalServerError, "failed to get pairs: "+err.Error())
+			return
+		}
+
 		sol.renderTemplate(
 			c,
 			http.StatusOK,
 			"pairs.html",
-			gin.H{},
+			gin.H{
+				"pairs": pairs,
+			},
 		)
 	})
 

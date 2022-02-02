@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	"github.com/Sagleft/uexchange-go"
 	"github.com/gin-gonic/gin"
 )
 
@@ -36,4 +37,8 @@ func (sol *solution) connectExchange() error {
 	//sol.ExchangeClient
 	// TODO
 	return nil
+}
+
+func (sol *solution) getExchangePairs() ([]uexchange.PairsDataContainer, error) {
+	return sol.ExchangeClient.GetPairs()
 }
