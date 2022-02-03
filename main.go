@@ -22,25 +22,6 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	// create client
-	client := uexchange.NewClient()
-
-	// auth
-	_, err = client.Auth(uexchange.Credentials{
-		AccountPublicKey: app.Config.Exchange.PublicKey,
-		Password:         app.Config.Exchange.Password,
-	})
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	// get balance
-	balanceData, err := client.GetBalance()
-	if err != nil {
-		log.Fatalln(err)
-	}
-	log.Println(balanceData)
-
 }
 
 func newSolution() *solution {
@@ -58,6 +39,20 @@ func (sol *solution) runGin() error {
 
 func (sol *solution) connectExchange() error {
 	//sol.ExchangeClient
+
+	// create client
+
+	sol.ExchangeClient = uexchange.NewClient()
+	client := sol.ExchangeClient
+
+	// auth
+	_, err := client.Auth(uexchange.Credentials{
+		AccountPublicKey: sol.Config.Exchange.PublicKey,
+		Password:         sol.Config.Exchange.Password,
+	})
+	if err != nil {
+		return nil
+	}
 	// TODO
 	return nil
 }

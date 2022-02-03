@@ -2,8 +2,22 @@
 <html lang="en">
 	{{block "head" .}} {{end}}
 	<body>
-		{{block "pairs" .}} {{end}}
-	=
+	
+		{{ range .pairs}}
+		<table>
+      	 <tr>
+			<td>
+			{{.Pair.PairTitle}}
+			</td>
+
+			<td>
+			{{.MarketData.Rate}}
+			</td>
+	  	 </tr>
+	   
+		</table>	
+		{{end}}
+
 		{{block "scripts" .}} {{end}}
 	</body>
 </html>
