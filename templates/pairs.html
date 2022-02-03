@@ -3,20 +3,14 @@
 	{{block "head" .}} {{end}}
 	<body>
 	
+		<table class="uk-table uk-table-small uk-table-striped uk-text-center">
 		{{ range .pairs}}
-		<table>
       	 <tr>
-			<td>
-			{{.Pair.PairTitle}}
-			</td>
-
-			<td>
-			{{.MarketData.Rate}}
-			</td>
+			<td>{{.Pair.PairTitle}}</td>
+			<td>{{.MarketData.Close}}</td>
 	  	 </tr>
-	   
-		</table>	
 		{{end}}
+		</table>
 
 		{{block "scripts" .}} {{end}}
 	</body>

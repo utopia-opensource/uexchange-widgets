@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -32,6 +33,7 @@ func (sol *solution) setupRoutes() error {
 			c.String(http.StatusInternalServerError, "failed to get pairs: "+err.Error())
 			return
 		}
+		log.Println(pairs)
 
 		sol.renderTemplate(
 			c,
