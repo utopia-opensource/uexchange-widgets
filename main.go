@@ -9,6 +9,7 @@ import (
 )
 
 func main() {
+
 	app := newSolution()
 	err := checkErrors(
 		app.parseConfig,
@@ -20,6 +21,26 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+
+	// create client
+	client := uexchange.NewClient()
+
+	// auth
+	_, err = client.Auth(uexchange.Credentials{
+		AccountPublicKey: app.Config.Exchange.PublicKey,
+		Password:         app.Config.Exchange.Password,
+	})
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	// get balance
+	balanceData, err := client.GetBalance()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	log.Println(balanceData)
+
 }
 
 func newSolution() *solution {
