@@ -27,8 +27,8 @@ func main() {
 
 	// auth
 	_, err = client.Auth(uexchange.Credentials{
-		AccountPublicKey: exchangeConfig.PublicKey,
-		Password:         exchangeConfig.Password,
+		AccountPublicKey: app.Config.Exchange.PublicKey,
+		Password:         app.Config.Exchange.Password,
 	})
 	if err != nil {
 		log.Fatalln(err)
