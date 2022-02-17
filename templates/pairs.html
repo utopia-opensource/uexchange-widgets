@@ -2,16 +2,42 @@
 <html lang="en">
 	{{block "head" .}} {{end}}
 	<body>
-	
-		<table class="uk-table uk-table-small uk-table-striped uk-text-center">
+	<div class="container">
+		<table id="scriptytable1"  class="display">
+			<thead>
+			<tr>
+				<th> Pair </th>
+				<th> Close </th>
+				<th> Low </th>
+				<th> High </th>
+				<th> Volume </th>
+			</tr>
+			</thead>
+
+			<tbody>
 		{{ range .pairs}}
-      	 <tr>
-			<td>{{.Pair.PairTitle}}</td>
-			<td>{{.MarketData.Close}}</td>
-	  	 </tr>
+      		 <tr>
+				<td>{{.Pair.PairTitle}}</td>
+				<td>{{.MarketData.Close}}</td>
+				<td>{{.MarketData.Low}}</td>
+				<td>{{.MarketData.High}}</td>
+				<td>{{.MarketData.Volume}}</td>
+	  		 </tr>
 		{{end}}
+
+			</tbody>
 		</table>
 
-		{{block "scripts" .}} {{end}}
+	</div>
+
+		{{block "scripts" .}} 
+				{{end}}
+
+				<script>
+
+			$(document).ready( function () {
+   				 $('#scriptytable1').DataTable();
+					} );
+				</script>
 	</body>
 </html>
